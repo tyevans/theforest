@@ -99,6 +99,17 @@ if __name__ == "__main__":
 
         elif cmd == "look":
             print(john.location.description)
+        elif cmd.startswith("say"):
+            actors = john.location.list_actors()
+            print(f"John says '{cmd[4:]}'")
+            if len(actors) == 1:
+                print("There is no one around to talk to you.")
+            elif len(actors) == 2:
+                for _actor in actors:
+                    if _actor != john:
+                        print(f"{_actor} stares at you.")
+            elif len(actors) >= 3:
+                print("There is more than one actor around to talk to you.")
         elif cmd == "pray":
             print("You raise your cross. Nothing happens.")
         else:
@@ -106,3 +117,4 @@ if __name__ == "__main__":
             continue
 
         the_forest.update()
+        print("======================")

@@ -89,6 +89,9 @@ class Location(Component):
     def preposition(self):
         return "in" if self.is_container else "on"
 
+    def list_actors(self):
+        return [actor for actor in self._components if isinstance(actor, Actor)]
+
     @property
     def description(self):
         output = [f"Location: {super().__str__()}"]
