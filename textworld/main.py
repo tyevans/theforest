@@ -25,21 +25,19 @@ class TheHouse(Location):
     def preposition(self):
         return "at"
 
+def gen_index(width):
+    def _inner(x, y):
+        return y * width + x
+    return _inner
 
 def generate_forest_tiles(width, height):
+    index_gen = gen_index(width)
+
     tiles = [Location("The Forest") for _ in range(width * height)]
 
-    car_pos_y = 6
-    car_pos_x = 2
-    tiles[car_pos_y * width + car_pos_x] = TheCar()
-
-    well_pos_y = 3
-    well_pos_x = 2
-    tiles[well_pos_y * width + well_pos_x] = TheWell()
-
-    house_pos_y = 0
-    house_pos_x = 2
-    tiles[house_pos_y * width + house_pos_x] = TheHouse()
+    tiles[index_gen(2, 6)] = TheCar()
+    tiles[index_gen(2, 3)] = TheWell()
+    tiles[index_gen(2, 0)] = TheHouse()
 
     for x in range(width):
         for y in range(height):
@@ -63,25 +61,23 @@ class TheForest:
 
 
 if __name__ == "__main__":
+    width = 5
+    height = 8
 
-    the_forest = TheForest()
+    index_gen = gen_index(width)
+    the_forest = TheForest(width, height)
     john = Actor("John Ward")
     john.needs = [
         Need("Faith", value=100, max_value=100, decay=0.),
         Need("Sanity", value=100, max_value=100, decay=0.)
     ]
 
+
     garcia = Actor("Stranger")
     garcia.needs = []
-    for location in the_forest.locations:
-        if isinstance(location, TheWell):
-            garcia.location = location
-            break
+    garcia.location = the_forest.locations[index_gen(2, 3)]
 
-    for location in the_forest.locations:
-        if isinstance(location, TheCar):
-            john.location = location
-            break
+    john.location = the_forest.locations[index_gen(2, 6)]
 
     print(john.description)
     while True:
