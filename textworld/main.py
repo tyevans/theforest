@@ -6,12 +6,26 @@ class TheCar(Location):
         super().__init__("The Car")
 
 
+class TheWell(Location):
+
+    def __init__(self):
+        super().__init__("The Well")
+
+    @property
+    def preposition(self):
+        return "at"
+
+
 def generate_forest_tiles(width, height):
     tiles = [Location("The Forest") for _ in range(width * height)]
 
-    car_pos_y = 7
+    car_pos_y = 6
     car_pos_x = 2
     tiles[car_pos_y * width + car_pos_x] = TheCar()
+
+    well_pos_y = 3
+    well_pos_x = 2
+    tiles[well_pos_y * width + well_pos_x] = TheWell()
 
     for x in range(width):
         for y in range(height):
