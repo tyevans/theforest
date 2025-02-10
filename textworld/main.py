@@ -102,75 +102,37 @@ class Location(Component):
         return "\n".join(output)
 
 if __name__ == "__main__":
-    dining_room = Location("The Dining Room")
-    kitchen = Location("The Kitchen")
+    car = Location("John's Car")
+    car.is_container = True
 
-    dining_room.exits = [
-        Portal(name="Kitchen", destination=kitchen),
+    the_forest = Location("The Forest")
+    the_forest.is_container = True
+
+    car.exits = [
+        Portal("The Forest", destination=the_forest),
+        Portal("The Road (North)", destination=car),
+        Portal("The Road (South)", destination=car),
     ]
-    kitchen.exits = [
-        Portal(name="Dining Room", destination=dining_room),
+
+    the_forest = Location("The Forest")
+    the_forest.is_container = True
+    the_forest.exits = [
+        Portal("Deeper into the Forest", destination=the_forest),
+        Portal("The Car", destination=car),
     ]
 
-    # front_porch = Location(name="The Front Porch")
-    # front_porch.is_container = False
-    # music_room = Location("The Music Room")
-    # dining_room = Location("The Dining Room")
-    # kitchen = Location("The Kitchen")
-    # living_room = Location("The Living Room")
-    # mainfloor_hallway = Location("The Main Floor Hallway")
-    # mainfloor_bathroom = Location("The Main Floor Bathroom")
-    # breakfast_nook = Location("The Breakfast Nook")
-    # back_porch = Location("The Back Porch")
-    # back_porch.is_container = False
-    #
-    # front_porch.exits = [
-    #     Portal(name="Front Door", destination=music_room),
-    # ]
-    # music_room.exits = [
-    #     Portal(name="Front Door", destination=front_porch),
-    #     Portal(name="Dining Room", destination=dining_room),
-    #     Portal(name="Hallway", destination=mainfloor_hallway),
-    # ]
-    # dining_room.exits = [
-    #     Portal(name="Kitchen", destination=kitchen),
-    #     Portal(name="Music Room", destination=music_room),
-    # ]
-    #
-    # kitchen.exits = [
-    #     Portal(name="Dining Room", destination=dining_room),
-    #     Portal(name="Living Room", destination=living_room),
-    # ]
-    #
-    # living_room.exits = [
-    #     Portal(name="Kitchen", destination=kitchen),
-    #     Portal(name="Breakfast Nook", destination=breakfast_nook),
-    #     Portal(name="Hallway", destination=mainfloor_hallway),
-    # ]
-    #
-    # mainfloor_hallway.exits = [
-    #     Portal(name="Music Room", destination=music_room),
-    #     Portal(name="Living Room", destination=living_room),
-    #     Portal(name="Bathroom", destination=mainfloor_bathroom),
-    # ]
-    # mainfloor_bathroom.exits = [
-    #     Portal(name="Hallway", destination=mainfloor_hallway),
-    # ]
-    # breakfast_nook.exits = [
-    #     Portal(name="Back Porch", destination=back_porch),
-    #     Portal(name="Living Room", destination=living_room),
-    # ]
+    john = Actor('John Ward')
+    john.location = car
 
-    actor2 = Actor('Max')
-    actor2.location = living_room
-    actor1 = Actor('Tyler')
-    actor1.location = front_porch
-    actor1.needs = [
+    john.needs = [
         Need("Hunger", value=100, max_value=100, decay=0.1),
         Need("Bladder", value=100, max_value=100, decay=0.03),
         Need("Happiness", value=100, max_value=100, decay=0.07),
+        Need("Faith", value=100, max_value=100, decay=0.00),
+        Need("Sanity", value=100, max_value=100, decay=0.00),
     ]
-    print(actor1.description)
+
+    print(john.description)
     while True:
         cmd = input(">>> ").lower()
 
@@ -179,13 +141,13 @@ if __name__ == "__main__":
                 break
             case "move":
                 next_portal = input("Through which portal? ").lower()
-                for portal in actor1.location.exits:
+                for portal in john.location.exits:
                     if portal.name.lower() == next_portal:
-                        actor1.location = portal.destination
-                print(actor1.description)
+                        john.location = portal.destination
+                print(john.description)
 
             case "look":
-                print(actor1.location.description)
+                print(john.location.description)
 
-        actor1.update()
+        john.update()
         print("========================")
