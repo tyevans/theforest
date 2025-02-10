@@ -75,7 +75,11 @@ class Portal(Component):
 
 class Location(Component):
     is_container: bool = True
-    exits: list[Portal] = []
+    exits: list[Portal]
+
+    def __init__(self, name, exits: list[Portal] = None):
+        self.exits = exits or []
+        super().__init__(name)
 
     def __str__(self):
         formatted = [

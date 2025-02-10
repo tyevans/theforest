@@ -1,3 +1,5 @@
+import random
+
 from textworld.models import Need, Actor, Portal, Location, Component
 
 
@@ -43,6 +45,7 @@ def generate_forest_tiles(width, height):
     for x in range(width):
         for y in range(height):
             tile = tiles[y * width + x]
+            tile.name = f"The Forest ({x}, {y})"
             tile.exits = []
             if y > 0:
                 tile.exits.append(Portal("North", destination=tiles[(y-1) * width + x]))
@@ -66,12 +69,16 @@ class TheForest(Component):
 
 
 class Stranger(Actor):
+    move_chance = 0.2
 
     def __init__(self):
         super().__init__("Stranger")
 
     def update(self):
-        print("The Stranger thinks")
+        if random.random() < self.move_chance:
+            exit = random.choice(self.location.exits)
+            self.location = exit.destination
+            print("The stranger moved")
 
 
 if __name__ == "__main__":
