@@ -16,6 +16,16 @@ class TheWell(Location):
         return "at"
 
 
+class TheHouse(Location):
+
+    def __init__(self):
+        super().__init__("The Martin House")
+
+    @property
+    def preposition(self):
+        return "at"
+
+
 def generate_forest_tiles(width, height):
     tiles = [Location("The Forest") for _ in range(width * height)]
 
@@ -26,6 +36,10 @@ def generate_forest_tiles(width, height):
     well_pos_y = 3
     well_pos_x = 2
     tiles[well_pos_y * width + well_pos_x] = TheWell()
+
+    house_pos_y = 0
+    house_pos_x = 2
+    tiles[house_pos_y * width + house_pos_x] = TheHouse()
 
     for x in range(width):
         for y in range(height):
