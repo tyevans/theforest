@@ -71,9 +71,17 @@ if __name__ == "__main__":
         Need("Sanity", value=100, max_value=100, decay=0.)
     ]
 
+    garcia = Actor("Stranger")
+    garcia.needs = []
+    for location in the_forest.locations:
+        if isinstance(location, TheWell):
+            garcia.location = location
+            break
+
     for location in the_forest.locations:
         if isinstance(location, TheCar):
             john.location = location
+            break
 
     print(john.description)
     while True:
