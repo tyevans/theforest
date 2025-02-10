@@ -1,0 +1,2 @@
+class NeedViolatedError(Exception):
+    pass
