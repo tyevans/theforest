@@ -48,3 +48,21 @@ if __name__ == "__main__":
             john.location = location
 
     print(john.description)
+    while True:
+        cmd = input(">>> ").lower()
+        match cmd:
+            case "q":
+                break
+            case "move":
+                next_portal = input("Through which portal? ").lower()
+                for portal in john.location.exits:
+                    if portal.name.lower() == next_portal:
+                        john.location = portal.destination
+                print(john.description)
+
+            case "look":
+                print(john.location.description)
+            case "pray":
+                print("You raise your cross. Nothing happens.")
+
+        john.update()
