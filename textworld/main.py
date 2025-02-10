@@ -148,6 +148,8 @@ if __name__ == "__main__":
 
             case "look":
                 print(john.location.description)
+            case "pray":
+                print("You raise your cross. Nothing happens.")
 
         john.update()
         print("========================")
