@@ -24,9 +24,6 @@ if __name__ == "__main__":
     john.location = car
 
     john.needs = [
-        Need("Hunger", value=100, max_value=100, decay=0.1),
-        Need("Bladder", value=100, max_value=100, decay=0.03),
-        Need("Happiness", value=100, max_value=100, decay=0.07),
         Need("Faith", value=100, max_value=100, decay=0.00),
         Need("Sanity", value=100, max_value=100, decay=0.00),
     ]
