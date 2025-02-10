@@ -39,7 +39,7 @@ class Need(Component):
 
 
 class Actor(Component):
-    location: 'Location'
+    _location: 'Location' = None
     needs: list[Need] = []
 
     def update(self):
@@ -61,6 +61,8 @@ class Actor(Component):
 
     @location.setter
     def location(self, value: 'Location'):
+        if self._location:
+            self._location.detach(self)
         value.attach(self)
         self._location = value
 
