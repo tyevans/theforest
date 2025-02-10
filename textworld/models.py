@@ -40,7 +40,7 @@ class Need(Component):
 
 class Actor(Component):
     location: 'Location'
-    needs: list[Need]
+    needs: list[Need] = []
 
     def update(self):
         for need in self.needs:

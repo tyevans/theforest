@@ -65,6 +65,11 @@ class TheForest(Component):
             self.attach(location)
 
 
+class Stranger(Actor):
+
+    def __init__(self):
+        super().__init__("Stranger")
+
 
 if __name__ == "__main__":
     width = 5
@@ -80,8 +85,7 @@ if __name__ == "__main__":
     john.location = the_forest.locations[index_gen(2, 6)]
     the_forest.attach(john)
 
-    garcia = Actor("Stranger")
-    garcia.needs = []
+    garcia = Stranger()
     garcia.location = the_forest.locations[index_gen(2, 3)]
     the_forest.attach(garcia)
 
