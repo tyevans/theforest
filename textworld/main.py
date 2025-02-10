@@ -70,6 +70,9 @@ class Stranger(Actor):
     def __init__(self):
         super().__init__("Stranger")
 
+    def update(self):
+        print("The Stranger thinks")
+
 
 if __name__ == "__main__":
     width = 5
