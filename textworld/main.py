@@ -1,4 +1,5 @@
-from textworld.models import Need, Actor, Portal, Location
+from textworld.models import Need, Actor, Portal, Location, Component
+
 
 class TheCar(Location):
 
@@ -54,10 +55,15 @@ def generate_forest_tiles(width, height):
 
     return tiles
 
-class TheForest:
+class TheForest(Component):
 
     def __init__(self, width=5, height=8):
+        super().__init__("The Forest")
         self.locations = generate_forest_tiles(width, height)
+
+        for location in self.locations:
+            self.attach(location)
+
 
 
 if __name__ == "__main__":
@@ -71,30 +77,32 @@ if __name__ == "__main__":
         Need("Faith", value=100, max_value=100, decay=0.),
         Need("Sanity", value=100, max_value=100, decay=0.)
     ]
-
+    john.location = the_forest.locations[index_gen(2, 6)]
+    the_forest.attach(john)
 
     garcia = Actor("Stranger")
     garcia.needs = []
     garcia.location = the_forest.locations[index_gen(2, 3)]
-
-    john.location = the_forest.locations[index_gen(2, 6)]
+    the_forest.attach(garcia)
 
     print(john.description)
     while True:
         cmd = input(">>> ").lower()
-        match cmd:
-            case "q":
-                break
-            case "move":
-                next_portal = input("Through which portal? ").lower()
-                for portal in john.location.exits:
-                    if portal.name.lower() == next_portal:
-                        john.location = portal.destination
-                print(john.description)
+        if cmd == "q":
+            break
+        elif cmd.startswith("move"):
+            next_portal = cmd[5:]
+            for portal in john.location.exits:
+                if portal.name.lower() == next_portal:
+                    john.location = portal.destination
+            print(john.description)
 
-            case "look":
-                print(john.location.description)
-            case "pray":
-                print("You raise your cross. Nothing happens.")
+        elif cmd == "look":
+            print(john.location.description)
+        elif cmd == "pray":
+            print("You raise your cross. Nothing happens.")
+        else:
+            print("Unknown command.")
+            continue
 
-        john.update()
+        the_forest.update()
