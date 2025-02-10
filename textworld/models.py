@@ -48,11 +48,11 @@ class Actor(Component):
 
     @property
     def description(self):
-        output = [f"{super().__str__()} {self.location.preposition} {self.location}"]
-        output.extend([
+        output = [
+            f"{super().__str__()} is {self.location.preposition} {self.location}",
             "Needs:",
             *(f"\t{need}" for need in self.needs),
-        ])
+        ]
         return "\n".join(output)
 
     @property
