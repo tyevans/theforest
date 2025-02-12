@@ -1,4 +1,15 @@
+import random
+
+from textual.widgets import Input
+
 from textworld.errors import NeedViolatedError
+
+
+def gen_index(width):
+    def _inner(x, y):
+        return y * width + x
+
+    return _inner
 
 
 class Component:
@@ -36,7 +47,8 @@ class Need(Component):
             raise NeedViolatedError(self)
 
     def __str__(self):
-        return f"{super().__str__()}  ({self.value/self.max_value:.2%})"
+        return f"{super().__str__()}  ({self.value / self.max_value:.2%})"
+
 
 ACTOR_DESCRIPTION_TEMPLATE = """
 # {actor}
@@ -44,6 +56,7 @@ ACTOR_DESCRIPTION_TEMPLATE = """
 * Current location: {actor.location}
 * Exits: {actor.location.exits_display}
 """
+
 
 class Actor(Component):
     _location: 'Location' = None
@@ -67,6 +80,12 @@ class Actor(Component):
             self._location.detach(self)
         value.attach(self)
         self._location = value
+
+    def get_need_value(self, need_name):
+        for need in self.needs:
+            if need.name.lower() == need_name.lower():
+                return need.value
+        return None
 
 
 class Portal(Component):
@@ -110,3 +129,114 @@ class Location(Component):
             *(f"\t{actor}" for actor in self._components if isinstance(actor, Actor)),
         ])
         return "\n".join(output)
+
+    def get_exit(self, name):
+        name = name.lower()
+        for portal in self.exits:
+            exit_name = portal.name.lower()
+            if exit_name == name:
+                return portal
+        return None
+
+class TheCar(Location):
+
+    def __init__(self):
+        super().__init__("The Car")
+
+
+class TheWell(Location):
+    color = "red"
+
+    def __init__(self):
+        super().__init__("The Well")
+
+    @property
+    def preposition(self):
+        return "at"
+
+
+class TheHouse(Location):
+
+    def __init__(self):
+        super().__init__("The Martin House")
+
+    @property
+    def preposition(self):
+        return "at"
+
+
+def generate_forest_tiles(width, height):
+    index_gen = gen_index(width)
+
+    tiles = [Location("The Forest") for _ in range(width * height)]
+
+    tiles[index_gen(2, 6)] = TheCar()
+    tiles[index_gen(2, 3)] = TheWell()
+    tiles[index_gen(2, 0)] = TheHouse()
+
+    for x in range(width):
+        for y in range(height):
+            tile = tiles[y * width + x]
+            tile.x = x
+            tile.y = y
+            if tile.name == "The Forest":
+                tile.name = f"The Forest ({x}, {y})"
+            tile.exits = []
+            if y > 0:
+                tile.exits.append(Portal("North", destination=tiles[(y - 1) * width + x]))
+            if y < height - 1:
+                tile.exits.append(Portal("South", destination=tiles[(y + 1) * width + x]))
+            if x < width - 1:
+                tile.exits.append(Portal("East", destination=tiles[y * width + x + 1]))
+            if x > 0:
+                tile.exits.append(Portal("West", destination=tiles[y * width + x - 1]))
+
+    return tiles
+
+
+class TheForest(Component):
+    update_frequency = 2.
+
+    def __init__(self, width=5, height=8):
+        self.next_update = self.update_frequency
+        self.width = width
+        self.height = height
+        super().__init__("The Forest")
+        self.locations = generate_forest_tiles(width, height)
+
+        for location in self.locations:
+            self.attach(location)
+
+        self.john = Actor("John Ward")
+        self.john.needs = [
+            Need("Health", value=100, max_value=100, decay=0.0001),
+            Need("Faith", value=100, max_value=100, decay=0.0002),
+            Need("Sanity", value=100, max_value=100, decay=0.001)
+        ]
+        self.john.location = self.get_tile_at(2, 6)
+        self.attach(self.john)
+        self.garcia = Stranger()
+        self.garcia.location = self.get_tile_at(2, 3)
+        self.attach(self.garcia)
+
+    def get_tile_at(self, x, y):
+        return self.locations[y * self.width + x]
+
+    def tick(self, delta_time):
+        self.next_update -= delta_time
+        if self.next_update <= 0:
+            self.next_update += self.update_frequency
+            self.update()
+
+
+class Stranger(Actor):
+    move_chance = 0.05
+
+    def __init__(self):
+        super().__init__("Stranger")
+
+    def update(self):
+        # maybe move
+        if len(self.location.list_actors()) == 1 and random.random() < self.move_chance:
+            exit = random.choice(self.location.exits)
+            self.location = exit.destination
