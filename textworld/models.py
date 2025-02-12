@@ -139,6 +139,7 @@ class Location(Component):
         return None
 
 class TheCar(Location):
+    color = "white"
 
     def __init__(self):
         super().__init__("The Car")
@@ -156,6 +157,7 @@ class TheWell(Location):
 
 
 class TheHouse(Location):
+    color = "yellow"
 
     def __init__(self):
         super().__init__("The Martin House")

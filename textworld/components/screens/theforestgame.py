@@ -84,10 +84,13 @@ class TheForestGameScreen(Screen):
         player_status.update(simulation=self.simulation)
 
     def watch_paused(self, paused: bool):
-        if self.paused is False:
+        if not paused:
             self.start_time = monotonic()
 
+
     def set_john_location(self, location: Location):
+        if self.paused:
+            return
         self.simulation.john.location = location
         env_text = self.query_one("#EnvironmentalText", BoxLabel)
         env_text.update(location.description)
@@ -134,6 +137,9 @@ class TheForestGameScreen(Screen):
         yield Footer()
 
     def on_input_submitted(self, data):
+        if self.paused:
+            return
+
         log = self.query_one(GameLog)
         log.write_line(data.value)
 
