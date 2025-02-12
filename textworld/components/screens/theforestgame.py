@@ -93,7 +93,7 @@ class TheForestGameScreen(Screen):
             return
         self.simulation.john.location = location
         env_text = self.query_one("#EnvironmentalText", BoxLabel)
-        env_text.update(location.description)
+        env_text.update(f"{location.emoji}\n\n{location.description}")
 
     def action_left(self):
         portal = self.simulation.john.location.get_exit("west")

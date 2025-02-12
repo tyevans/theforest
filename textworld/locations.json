@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Whispering Hollow",
+    "description": "The trees lean in close, their skeletal branches tangled overhead.\n A breeze stirs the dry leaves, making them rustle like hushed voices sharing secrets.",
+    "color": "grey",
+    "emoji": "🌫️🌲👂"
+  },
+  {
+    "name": "The Crooked Path",
+    "description": "The trail twists unnaturally, as if avoiding something unseen.\n The gnarled roots claw at the dirt, waiting for careless feet to stumble.",
+    "color": "brown",
+    "emoji": "🌳🌀🚶"
+  },
+  {
+    "name": "The Hollow Glade",
+    "description": "The trees thin out into a small clearing, but the silence here is heavy.\n No birds, no insects—only the distant creak of unseen boughs shifting.",
+    "color": "yellow",
+    "emoji": "🍂🌾🤫"
+  },
+  {
+    "name": "Veil of Fog",
+    "description": "A thin mist clings to the undergrowth, curling around your ankles like searching fingers. \n It never quite rises above your knees, as if afraid to go higher.",
+    "color": "white",
+    "emoji": "🌫️🦶👁️"
+  },
+  {
+    "name": "Echoing Thicket",
+    "description": "Every step you take is answered by another, fainter footfall.\n The underbrush is dense, the shadows long—perhaps the sound is only the forest mocking you.",
+    "color": "green",
+    "emoji": "🌿👣🔊"
+  },
+  {
+    "name": "The Watching Wood",
+    "description": "Knotholes in the trees gape like empty eyes, some wide, others squinting as if scrutinizing your every move.\n It’s just natural erosion... probably.",
+    "color": "brown",
+    "emoji": "👁️🌲😨"
+  },
+  {
+    "name": "Spider’s Passage",
+    "description": "Silver threads dangle from low branches, swaying slightly despite the still air.\n You don’t see any spiders, but the strands stretch far into the trees.",
+    "color": "white",
+    "emoji": "🕷️🕸️🌳"
+  },
+  {
+    "name": "The Sunken Trail",
+    "description": "The ground dips lower here, flanked by steep ridges of roots and moss.\n The deeper you walk, the less the wind reaches you. The world feels further away.",
+    "color": "green",
+    "emoji": "🌿⬇️🌱"
+  },
+  {
+    "name": "Bonewhite Grove",
+    "description": "The bark of the trees here is pale and peeling, their branches stark against the sky like brittle ribs.\n A few fallen logs are hollowed out, bleached by time.",
+    "color": "white",
+    "emoji": "🌳⚪💀"
+  },
+  {
+    "name": "The Breathing Glade",
+    "description": "The wind moves strangely here, exhaling in long, steady sighs.\n The leaves ripple as if something beneath them is stirring, but nothing ever emerges.",
+    "color": "grey",
+    "emoji": "🍃😮‍💨👀"
+  },
+  {
+    "name": "The Murmuring Pines",
+    "description": "The wind moves through the tall trees in such a way that it almost sounds like voices.\n The more you listen, the harder it is to convince yourself they aren’t words.",
+    "color": "green",
+    "emoji": "🌲💬🌬️"
+  },
+  {
+    "name": "The Rootweb",
+    "description": "The forest floor is a tangled maze of exposed roots, twisting and weaving \nas if the trees are trying to hold something beneath the soil.",
+    "color": "brown",
+    "emoji": "🌿🕸️🦶"
+  },
+  {
+    "name": "Lantern Hollow",
+    "description": "Small patches of luminescent fungi cling to rotting logs and damp stones, casting a sickly green glow. \nThey pulse gently, as though breathing.",
+    "color": "yellow",
+    "emoji": "🍄✨👁️"
+  },
+  {
+    "name": "The Croaking Fen",
+    "description": "A shallow mist pools over the ground, damp and cloying.\n Frogs call from the darkness, their voices deep and hollow, echoing longer than they should.",
+    "color": "grey",
+    "emoji": "🐸🌫️🎶"
+  },
+  {
+    "name": "The Hollow Trunk",
+    "description": "A massive fallen tree stretches across the path, its insides rotted away into a gaping tunnel.\n The air inside is damp and strangely still, as if waiting.",
+    "color": "brown",
+    "emoji": "🌳🕳️😶"
+  },
+  {
+    "name": "Silent Crossing",
+    "description": "A narrow bridge of stone spans a small ravine.\n The moment you step onto it, the forest sounds fade away entirely. Only when you reach the other side do they return.",
+    "color": "grey",
+    "emoji": "🌉🤐🔇"
+  },
+  {
+    "name": "The Scorched Grove",
+    "description": "A handful of trees stand blackened and dead, charred as though by an old fire.\n Yet the undergrowth around them is untouched, thriving as if the flames never spread.",
+    "color": "grey",
+    "emoji": "🔥🌲🖤"
+  },
+  {
+    "name": "The Endless Trunk",
+    "description": "A massive tree stands before you, its bark rough and furrowed.\n You step around it, then again, and again. Have you really moved at all?",
+    "color": "brown",
+    "emoji": "🌳🔁🤔"
+  },
+  {
+    "name": "The Twisting Boughs",
+    "description": "The branches overhead curl and knot together, \n forming intricate patterns in the air.\n\n Some look like shapes\n—figures, faces—\nbut it’s just coincidence.",
+    "color": "green",
+    "emoji": "🌿👁️🔄"
+  },
+  {
+    "name": "The Listening Grove",
+    "description": "You pause for a moment, and the forest goes silent with you.\n No birds, no insects, just waiting, as if something unseen is listening too.",
+    "color": "grey",
+    "emoji": "👂🌲😶"
+  }
+]

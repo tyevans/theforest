@@ -1,4 +1,6 @@
+import json
 import random
+from pathlib import Path
 
 from textual.widgets import Input
 
@@ -99,13 +101,18 @@ class Portal(Component):
 class Location(Component):
     is_container: bool = True
     exits: list[Portal]
+    description: str = "A location"
+    emoji: str = "🚫"
     color: str = "green"
     x: int = 0
     y: int = 0
 
-    def __init__(self, name, exits: list[Portal] = None):
-        self.exits = exits or []
+    def __init__(self, name, exits: list[Portal] = None, description=None, emoji=None, color=None):
         super().__init__(name)
+        self.exits = exits or []
+        self.description = description or self.description
+        self.emoji = emoji or self.emoji
+        self.color = color or self.color
 
     def __str__(self):
         return f"[{self.color}]{self.name}[/{self.color}]"
@@ -120,15 +127,6 @@ class Location(Component):
 
     def list_actors(self):
         return [actor for actor in self._components if isinstance(actor, Actor)]
-
-    @property
-    def description(self):
-        output = [f"Location: {super().__str__()}"]
-        output.extend([
-            f"Actors {self.preposition} {super().__str__()}:",
-            *(f"\t{actor}" for actor in self._components if isinstance(actor, Actor)),
-        ])
-        return "\n".join(output)
 
     def get_exit(self, name):
         name = name.lower()
@@ -170,8 +168,23 @@ class TheHouse(Location):
 def generate_forest_tiles(width, height):
     index_gen = gen_index(width)
 
-    tiles = [Location("The Forest") for _ in range(width * height)]
+    total_tiles = width * height
+    with open(Path(__file__).parent / 'locations.json') as fd:
+        data = json.load(fd)
+    defined_locations = [
+        Location(entry['name'], [], entry['description'], entry['emoji'], entry['color']) for entry in data]
 
+    if total_tiles < len(defined_locations):
+        defined_locations = defined_locations[:total_tiles]
+    elif total_tiles > len(defined_locations):
+        defined_locations.extend(
+            [Location("The Forest") for _ in range(total_tiles - len(defined_locations))]
+        )
+    tiles = defined_locations[::]
+    num_tiles = len(tiles)
+    if total_tiles != num_tiles:
+        raise Exception("The number of tiles does not match the number of locations")
+    random.shuffle(tiles)
     tiles[index_gen(2, 6)] = TheCar()
     tiles[index_gen(2, 3)] = TheWell()
     tiles[index_gen(2, 0)] = TheHouse()
@@ -183,6 +196,8 @@ def generate_forest_tiles(width, height):
             tile.y = y
             if tile.name == "The Forest":
                 tile.name = f"The Forest ({x}, {y})"
+                tile.emoji = "🌲🌳🌲"
+                tile.description = "A random stretch of forest, it's almost pleasant."
             tile.exits = []
             if y > 0:
                 tile.exits.append(Portal("North", destination=tiles[(y - 1) * width + x]))
