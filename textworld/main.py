@@ -1,5 +1,7 @@
 import random
+from rich import print
 
+from textworld.map import print_map
 from textworld.models import Need, Actor, Portal, Location, Component
 
 
@@ -10,6 +12,7 @@ class TheCar(Location):
 
 
 class TheWell(Location):
+    color = "red"
 
     def __init__(self):
         super().__init__("The Well")
@@ -45,7 +48,10 @@ def generate_forest_tiles(width, height):
     for x in range(width):
         for y in range(height):
             tile = tiles[y * width + x]
-            tile.name = f"The Forest ({x}, {y})"
+            tile.x = x
+            tile.y = y
+            if tile.name == "The Forest":
+                tile.name = f"The Forest ({x}, {y})"
             tile.exits = []
             if y > 0:
                 tile.exits.append(Portal("North", destination=tiles[(y-1) * width + x]))
@@ -61,24 +67,28 @@ def generate_forest_tiles(width, height):
 class TheForest(Component):
 
     def __init__(self, width=5, height=8):
+        self.width = width
+        self.height = height
         super().__init__("The Forest")
         self.locations = generate_forest_tiles(width, height)
 
         for location in self.locations:
             self.attach(location)
 
+    def get_tile_at(self, x, y):
+        return self.locations[y * self.width + x]
 
 class Stranger(Actor):
-    move_chance = 0.2
+    move_chance = 0.0
 
     def __init__(self):
         super().__init__("Stranger")
 
     def update(self):
+        # maybe move
         if random.random() < self.move_chance:
             exit = random.choice(self.location.exits)
             self.location = exit.destination
-            print("The stranger moved")
 
 
 if __name__ == "__main__":
@@ -126,6 +136,10 @@ if __name__ == "__main__":
                 print("There is more than one actor around to talk to you.")
         elif cmd == "pray":
             print("You raise your cross. Nothing happens.")
+
+        elif cmd == "map":
+            print_map(the_forest)
+            continue
         else:
             print("Unknown command.")
             continue

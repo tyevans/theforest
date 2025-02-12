@@ -2,13 +2,14 @@ from textworld.errors import NeedViolatedError
 
 
 class Component:
+    color = "blue"
 
     def __init__(self, name):
         self.name = name
         self._components = []
 
     def __str__(self):
-        return self.name
+        return f"[{self.color}]{self.name}[/{self.color}]"
 
     def attach(self, component: 'Component'):
         self._components.append(component)
@@ -37,6 +38,12 @@ class Need(Component):
     def __str__(self):
         return f"{super().__str__()}  ({self.value/self.max_value:.2%})"
 
+ACTOR_DESCRIPTION_TEMPLATE = """
+# {actor}
+
+* Current location: {actor.location}
+* Exits: {actor.location.exits_display}
+"""
 
 class Actor(Component):
     _location: 'Location' = None
@@ -48,12 +55,7 @@ class Actor(Component):
 
     @property
     def description(self):
-        output = [
-            f"{super().__str__()} is {self.location.preposition} {self.location}",
-            "Needs:",
-            *(f"\t{need}" for need in self.needs),
-        ]
-        return "\n".join(output)
+        return ACTOR_DESCRIPTION_TEMPLATE.format(actor=self)
 
     @property
     def location(self):
@@ -78,18 +80,20 @@ class Portal(Component):
 class Location(Component):
     is_container: bool = True
     exits: list[Portal]
+    color: str = "green"
+    x: int = 0
+    y: int = 0
 
     def __init__(self, name, exits: list[Portal] = None):
         self.exits = exits or []
         super().__init__(name)
 
     def __str__(self):
-        formatted = [
-            super().__str__(),
-            "Exits: ",
-            *[f"\t{portal}" for portal in self.exits]
-        ]
-        return "\n".join(formatted)
+        return f"[{self.color}]{self.name}[/{self.color}]"
+
+    @property
+    def exits_display(self):
+        return ", ".join(str(exit) for exit in self.exits)
 
     @property
     def preposition(self):
