@@ -3,7 +3,7 @@ from textual.widget import Widget
 from textual.widgets import Label
 
 from textworld.map import generate_map_table
-from textworld.models import Location
+from textworld.models.locations import Location
 
 
 class MiniMap(Widget):

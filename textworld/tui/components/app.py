@@ -1,9 +1,9 @@
 from textual.app import App
 from textual.widgets import Button
 
-from textworld.components.screens.gamemenu import GameMenuScreen
-from textworld.components.screens.mainmenu import MainMenuScreen
-from textworld.components.screens.theforestgame import TheForestGameScreen
+from textworld.tui.components.screens.gamemenu import GameMenuScreen
+from textworld.tui.components.screens.mainmenu import MainMenuScreen
+from textworld.tui.components.screens.theforestgame import TheForestGameScreen
 
 
 class TheForestApp(App):

@@ -1,4 +1,4 @@
-from textworld.components.app import TheForestApp
+from textworld.tui.components.app import TheForestApp
 
 def main():
     app = TheForestApp()

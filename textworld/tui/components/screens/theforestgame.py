@@ -4,13 +4,14 @@ from textual.app import ComposeResult
 from textual.containers import Vertical, Horizontal
 from textual.reactive import reactive
 from textual.screen import Screen
-from textual.widgets import Footer, Static, Header, Log, Input
+from textual.widgets import Footer, Header, Input
 
-from textworld.components.boxlabel import BoxLabel
-from textworld.components.gamelog import GameLog
-from textworld.components.minimap import MiniMap
-from textworld.components.playerstatus import PlayerStatus
-from textworld.models import TheForest, Location
+from textworld.models.locations import Location
+from textworld.models.theforest import TheForest
+from textworld.tui.components.boxlabel import BoxLabel
+from textworld.tui.components.gamelog import GameLog
+from textworld.tui.components.minimap import MiniMap
+from textworld.tui.components.playerstatus import PlayerStatus
 from textworld.settings import AppSettings
 
 
@@ -63,6 +64,7 @@ class TheForestGameScreen(Screen):
 
     start_time = reactive(monotonic)
     runtime = reactive(0.0)
+    previous_runtime = 0
     paused = reactive(False)
 
     def on_mount(self) -> None:
@@ -76,12 +78,17 @@ class TheForestGameScreen(Screen):
 
     def watch_runtime(self, runtime: float) -> None:
         """Called when the time attribute changes."""
-        self.simulation.tick(self.runtime)
+        self.simulation.tick(self.runtime - self.previous_runtime)
+        self.previous_runtime = self.runtime
         mini_map = self.query_one(MiniMap)
         mini_map.update(simulation=self.simulation)
 
         player_status = self.query_one(PlayerStatus)
         player_status.update(simulation=self.simulation)
+
+        log = self.query_one(GameLog)
+        log.set_lines(self.simulation.john.history)
+
 
     def watch_paused(self, paused: bool):
         if not paused:
@@ -141,7 +148,6 @@ class TheForestGameScreen(Screen):
             return
 
         log = self.query_one(GameLog)
-        log.write_line(data.value)
 
         cmd = data.value
         john = self.simulation.john
@@ -153,23 +159,9 @@ class TheForestGameScreen(Screen):
                     john.location = portal.destination
                     self.set_john_location(portal.destination)
 
-        elif cmd == "look":
-            log.write_line(john.location.description)
         elif cmd.startswith("say"):
-            actors = john.location.list_actors()
-            log.write_line(f"John says '{cmd[4:]}'")
-            if len(actors) == 1:
-                log.write_line("There is no one around to talk to you.")
-            elif len(actors) == 2:
-                for _actor in actors:
-                    if _actor != john:
-                        log.write_line(f"{_actor} stares at you.")
-            elif len(actors) >= 3:
-                log.write_line("There is more than one actor around to talk to you.")
-        elif cmd == "pray":
-            log.write_line("You raise your cross. Nothing happens.")
-        else:
-            log.write_line("Unknown command.")
+            john.queued_actions.append({"action": "say", "content": cmd[4:]})
+        log.set_lines(john.history)
 
         user_input = self.query_one(Input)
         user_input.value = ""

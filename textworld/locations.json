@@ -25,13 +25,13 @@
   },
   {
     "name": "Echoing Thicket",
-    "description": "Every step you take is answered by another, fainter footfall.\n The underbrush is dense, the shadows long—perhaps the sound is only the forest mocking you.",
+    "description": "Every step you take is answered by another, fainter footfall. \nThe underbrush is dense, \nthe shadows long\n\nPerhaps the sound is only the forest mocking you.",
     "color": "green",
     "emoji": "🌿👣🔊"
   },
   {
     "name": "The Watching Wood",
-    "description": "Knotholes in the trees gape like empty eyes, some wide, others squinting as if scrutinizing your every move.\n It’s just natural erosion... probably.",
+    "description": "Knotholes in the trees gape like empty eyes,\nsome wide, others squinting\nas if scrutinizing your every move.\nIt’s just natural erosion. \n\n... probably.",
     "color": "brown",
     "emoji": "👁️🌲😨"
   },
@@ -85,7 +85,7 @@
   },
   {
     "name": "The Hollow Trunk",
-    "description": "A massive fallen tree stretches across the path, its insides rotted away into a gaping tunnel.\n The air inside is damp and strangely still, as if waiting.",
+    "description": "A massive fallen tree stretches across the path,\n its insides rotted away into a gaping tunnel.\n The air inside is damp and strangely still, as if waiting.",
     "color": "brown",
     "emoji": "🌳🕳️😶"
   },
@@ -97,7 +97,7 @@
   },
   {
     "name": "The Scorched Grove",
-    "description": "A handful of trees stand blackened and dead, charred as though by an old fire.\n Yet the undergrowth around them is untouched, thriving as if the flames never spread.",
+    "description": "A handful of trees stand blackened and dead,\n charred as though by an old fire.\n Yet the undergrowth around them is untouched, thriving as if the flames never spread.",
     "color": "grey",
     "emoji": "🔥🌲🖤"
   },

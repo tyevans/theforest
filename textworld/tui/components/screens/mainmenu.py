@@ -13,7 +13,3 @@ class MainMenuScreen(Screen):
         yield Button("New Game", id="new_game")
         yield Button("Quit", id="quit")
         yield Footer(id="Footer")
-
-    def on_key(self, event: events.Key) -> None:
-        if event.key == "escape":
-            self.action_pause()
