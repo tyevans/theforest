@@ -2,7 +2,7 @@ from textual.app import ComposeResult
 from textual.containers import VerticalScroll
 from textual.reactive import reactive
 from textual.widget import Widget
-from textual.widgets import Static, Label
+from textual.widgets import Label
 
 from textworld.formatting import wordwrap
 

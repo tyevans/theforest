@@ -1,5 +1,6 @@
 from rich.table import Table
 
+
 def generate_map_table(forest, player_location):
     table = Table(show_header=False)
 

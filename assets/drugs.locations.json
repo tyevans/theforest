@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Cul-de-Sac",
+    "description": "A quiet, circular street with well-manicured lawns and parked minivans.",
+    "color": "#A2D149",
+    "emoji": "🏡🚗"
+  },
+  {
+    "name": "Strip Mall",
+    "description": "A row of small shops, a nail salon, and a fast-food place with a nearly full parking lot.",
+    "color": "#D4A017",
+    "emoji": "🏬🛍️🍔"
+  },
+  {
+    "name": "Big Box Store",
+    "description": "A massive retail store with endless aisles and a chaotic parking lot.",
+    "color": "#4287f5",
+    "emoji": "🏪🛒"
+  },
+  {
+    "name": "Soccer Field",
+    "description": "Kids running around, parents in folding chairs, and a snack bar serving hot dogs.",
+    "color": "#55A630",
+    "emoji": "⚽🥅🌭"
+  },
+  {
+    "name": "Drive-Thru",
+    "description": "A popular fast-food chain with a long line of cars waiting for their coffee fix.",
+    "color": "#C0392B",
+    "emoji": "🚗☕🍟"
+  },
+  {
+    "name": "Elementary School",
+    "description": "A red brick school with a playground, a flagpole, and a bustling drop-off lane.",
+    "color": "#F4A261",
+    "emoji": "🏫🎒✏️"
+  },
+  {
+    "name": "Suburban Park",
+    "description": "A small green space with a walking trail, benches, and a duck-filled pond.",
+    "color": "#76C893",
+    "emoji": "🌳🦆🏞️"
+  },
+  {
+    "name": "Gas Station",
+    "description": "A 24-hour fuel stop with an overpriced convenience store inside.",
+    "color": "#E1B12C",
+    "emoji": "⛽🥤"
+  },
+  {
+    "name": "HOA Meeting",
+    "description": "A beige community center where neighbors argue about mailbox colors.",
+    "color": "#7D7D7D",
+    "emoji": "🏠📋🤨"
+  },
+  {
+    "name": "Neighbor’s Backyard",
+    "description": "A BBQ grill is sizzling, kids are on the trampoline, and someone brought potato salad.",
+    "color": "#C57B57",
+    "emoji": "🍔🏡🎉"
+  }
+]

@@ -12,7 +12,7 @@ class MiniMap(Widget):
 
     def update(self, simulation):
         self.simulation = simulation
-        self.location = self.simulation.john.location
+        self.location = self.simulation.player.location
         map_grid = self.query_one("#MapGrid", Label)
         map_grid.update(generate_map_table(simulation, self.location))
 
@@ -22,7 +22,6 @@ class MiniMap(Widget):
 
         exits_label = self.query_one("#ExitsLabel", Label)
         exits_label.update(f"Exits: {value.exits_display}")
-
 
     def compose(self):
         yield Label(id="LocationLabel")

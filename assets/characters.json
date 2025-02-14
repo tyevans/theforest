@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Pedro Garcia",
+    "aliases": ["Father", "Pedro (by close friends)"],
+    "starting_location": "random",
+    "private_facts": [
+      "Pedro Garcia is 6 feet tall",
+      "Pedro Garcia is 72 years old",
+      "Pedro Garcia is an exorcist",
+      "Pedro Garcia was performing an exorcism on Michael",
+      "Michael is possessed by the demon Gnasif",
+      "Gnasif is a real entity that sometimes speaks through Michael",
+      "Michael fled into The Forest and Pedro Garcia followed them",
+      "Pedro Garcia has never been in The Forest before",
+      "Pedro Garcia must not allow Michael to enter the location The Hollow Glade"
+    ],
+    "public_facts": [
+      "Pedro Garcia is 6 feet tall",
+      "Pedro Garcia is old",
+      "Pedro Garcia is a solidly built",
+      "Pedro Garcia is hispanic",
+      "Pedro Garcia is a catholic priest",
+      "Pedro Garcia is wearing his priest's garments",
+      "All locations Pedro Garcia can travel to are in The Forest",
+      "Pedro Garcia must locate Michael before evil can be unleashed"
+    ]
+  },
+    {
+    "name": "Michael",
+    "aliases": ["The Boy", "Gnasif (when possessed)"],
+    "starting_location": "random",
+    "private_facts": [
+      "Michael is possessed by the demon Gnasif",
+      "Gnasif is a real entity that sometimes speaks through Michael",
+      "Gnasif was being exorsized by Pedro Garcia",
+      "Michael fled into The Forest and Pedro Garcia followed them",
+      "All locations Michael can travel to are in The Forest",
+      "Michael runs on all fours",
+      "Michael must enter the location 'The Hollow Glade' before Pedro Garcia stops them."
+    ],
+    "public_facts": [
+      "Michael is 5 feet 10 inches tall",
+      "Michael is 15 years old",
+      "Michael is skinny",
+      "Michael is hispanic"
+    ]
+  }
+
+]

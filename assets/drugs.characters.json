@@ -1,0 +1,93 @@
+[
+  {
+    "name": "Dante 'Ghost' Alvarez",
+    "aliases": ["Ghost"],
+    "starting_location": "random",
+    "private_facts": [
+      "Dante Alvarez is 37 years old",
+      "Dante Alvarez runs a discreet high-end drug operation",
+      "Dante Alvarez only sells to wealthy clients",
+      "Dante Alvarez avoids violence whenever possible",
+      "Dante Alvarez owns a hidden safe house in the suburbs"
+    ],
+    "public_facts": [
+      "Dante Alvarez is 5 feet 11 inches tall",
+      "Dante Alvarez is lean but fit",
+      "Dante Alvarez is Hispanic",
+      "Dante Alvarez wears expensive but subtle clothing",
+      "Dante Alvarez is known for his calm demeanor",
+      "Dante Alvarez operates in high-end clubs and private parties",
+      "Dante Alvarez prefers to deal in designer drugs",
+      "Dante Alvarez only deals mdma and ecstacy"
+    ]
+  },
+  {
+    "name": "Lana Vasquez",
+    "aliases": ["L", "Lana V"],
+    "starting_location": "random",
+    "private_facts": [
+      "Lana Vasquez is 29 years old",
+      "Lana Vasquez is a mid-level supplier for a cartel",
+      "Lana Vasquez is ruthless when crossed",
+      "Lana Vasquez launders money through a nail salon",
+      "Lana Vasquez has an informant inside the local police",
+      "Lana Vasquez only sells weed"
+    ],
+    "public_facts": [
+      "Lana Vasquez is 5 feet 6 inches tall",
+      "Lana Vasquez is curvy with an athletic build",
+      "Lana Vasquez is Hispanic",
+      "Lana Vasquez is often seen wearing designer sunglasses",
+      "Lana Vasquez has a reputation for getting things done",
+      "Lana Vasquez operates in the city's warehouse district",
+      "Lana Vasquez is known to be well-connected"
+    ]
+  },
+  {
+    "name": "Trey 'Stacks' Johnson",
+    "aliases": ["Stacks"],
+    "starting_location": "random",
+    "private_facts": [
+      "Trey Johnson is 41 years old",
+      "Trey Johnson manages a network of street dealers",
+      "Trey Johnson is a former gang enforcer",
+      "Trey Johnson hides his money in offshore accounts",
+      "Trey Johnson secretly wants to retire but is in too deep"
+    ],
+    "public_facts": [
+      "Trey Johnson is 6 feet 3 inches tall",
+      "Trey Johnson is muscular with a few visible scars",
+      "Trey Johnson is Black",
+      "Trey Johnson is always seen with a cigar",
+      "Trey Johnson operates out of an auto body shop",
+      "Trey Johnson has a reputation for being reliable",
+      "Trey Johnson deals in bulk shipments of product",
+      "Trey Johnson will openly sell anything",
+      "Trey Johnson is dangerous and scary"
+    ]
+  },
+  {
+    "name": "Mason Carter",
+    "aliases": ["Ace"],
+    "starting_location": "random",
+    "private_facts": [
+      "Mason Carter is 25 years old",
+      "Mason Carter is a small-time dealer trying to move up",
+      "Mason Carter is reckless and takes unnecessary risks",
+      "Mason Carter has a gambling problem",
+      "Mason Carter is being watched by the DEA",
+      "Sells Cocaine",
+      "Sells Molly",
+      "Does not sell anything but cocaine and molly"
+    ],
+    "public_facts": [
+      "Mason Carter is 5 feet 9 inches tall",
+      "Mason Carter is slim but wiry",
+      "Mason Carter is White",
+      "Mason Carter drives a beat-up sports car",
+      "Mason Carter deals primarily to college students",
+      "Mason Carter is always looking for a bigger opportunity",
+      "Mason Carter has been arrested but never convicted"
+    ]
+  }
+]

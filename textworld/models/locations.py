@@ -1,9 +1,9 @@
-from textworld.models.actors import Actor
+from textworld.models.actors.actor import Actor
 from textworld.models.components import Component
 
 
 class Portal(Component):
-    destination: 'Location'
+    destination: "Location"
 
     def __init__(self, name, destination):
         super().__init__(name)
@@ -19,7 +19,9 @@ class Location(Component):
     x: int = 0
     y: int = 0
 
-    def __init__(self, name, exits: list[Portal] = None, description=None, emoji=None, color=None):
+    def __init__(
+        self, name, exits: list[Portal] = None, description=None, emoji=None, color=None
+    ):
         super().__init__(name)
         self.exits = exits or []
         self.description = description or self.description
@@ -52,22 +54,26 @@ class Location(Component):
                 return portal
         return None
 
-    def update(self):
-        downstream_actions = super().update()
+    async def update(self):
+        downstream_actions = await super().update()
         for actor, action in downstream_actions:
-            if action['action'] == 'move':
-                portal = self.get_exit(action['direction'])
+            if action["action"] == "move":
+                portal = self.get_exit(action["direction"])
                 if portal:
                     for other_actor in actor.location.list_actors():
                         if other_actor is actor:
-                            actor.history.append(f"Moved through portal '{action['direction']}'")
+                            actor.history.append(
+                                f"Moved through portal '{action['direction']}'"
+                            )
                         else:
-                            other_actor.history.append(f"Saw {actor.name} through portal '{action['direction']}'")
+                            other_actor.history.append(
+                                f"Saw {actor.name} through portal '{action['direction']}'"
+                            )
                     actor.location = portal.destination
-            elif action['action'] == 'say':
+            elif action["action"] == "say":
                 local_actors = self.list_actors()
                 for other_actor in local_actors:
-                    other_actor.hear(actor, action['content'])
+                    other_actor.hear(actor, action["content"])
         return []
 
 

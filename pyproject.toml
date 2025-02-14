@@ -12,7 +12,13 @@ rich = "^13.9.4"
 textual = "^1.0.0"
 pydantic-settings = "^2.7.1"
 ollama = "^0.4.7"
+aiohttp = "^3.11.12"
+aiodns = "^3.2.0"
 
+
+[tool.poetry.group.dev.dependencies]
+textual-dev = "^1.7.0"
+black = "^25.1.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -7,7 +7,7 @@ from textual.screen import Screen
 from textual.widgets import Footer, Header, Input
 
 from textworld.models.locations import Location
-from textworld.models.theforest import TheForest
+from textworld.models.simulation import Simulation
 from textworld.tui.components.boxlabel import BoxLabel
 from textworld.tui.components.gamelog import GameLog
 from textworld.tui.components.minimap import MiniMap
@@ -17,7 +17,7 @@ from textworld.settings import AppSettings
 
 def create_the_forest():
     settings = AppSettings()
-    the_forest = TheForest(settings.map_width, settings.map_height)
+    the_forest = Simulation(settings.map_width, settings.map_height)
     return the_forest
 
 
@@ -27,6 +27,7 @@ class TheForestGameScreen(Screen):
 
     handles time management and global world state.
     """
+
     DEFAULT_CSS = """
     .container {
         width: 100%;
@@ -76,9 +77,9 @@ class TheForestGameScreen(Screen):
         if not self.paused:
             self.runtime = monotonic() - self.start_time
 
-    def watch_runtime(self, runtime: float) -> None:
+    async def watch_runtime(self, runtime: float) -> None:
         """Called when the time attribute changes."""
-        self.simulation.tick(self.runtime - self.previous_runtime)
+        await self.simulation.tick(self.runtime - self.previous_runtime)
         self.previous_runtime = self.runtime
         mini_map = self.query_one(MiniMap)
         mini_map.update(simulation=self.simulation)
@@ -87,40 +88,38 @@ class TheForestGameScreen(Screen):
         player_status.update(simulation=self.simulation)
 
         log = self.query_one(GameLog)
-        log.set_lines(self.simulation.john.history)
-
+        log.set_lines(self.simulation.player.history)
 
     def watch_paused(self, paused: bool):
         if not paused:
             self.start_time = monotonic()
 
-
-    def set_john_location(self, location: Location):
+    def set_player_location(self, location: Location):
         if self.paused:
             return
-        self.simulation.john.location = location
+        self.simulation.player.location = location
         env_text = self.query_one("#EnvironmentalText", BoxLabel)
         env_text.update(f"{location.emoji}\n\n{location.description}")
 
     def action_left(self):
-        portal = self.simulation.john.location.get_exit("west")
+        portal = self.simulation.player.location.get_exit("west")
         if portal:
-            self.set_john_location(portal.destination)
+            self.set_player_location(portal.destination)
 
     def action_right(self):
-        portal = self.simulation.john.location.get_exit("east")
+        portal = self.simulation.player.location.get_exit("east")
         if portal:
-            self.set_john_location(portal.destination)
+            self.set_player_location(portal.destination)
 
     def action_up(self):
-        portal = self.simulation.john.location.get_exit("north")
+        portal = self.simulation.player.location.get_exit("north")
         if portal:
-            self.set_john_location(portal.destination)
+            self.set_player_location(portal.destination)
 
     def action_down(self):
-        portal = self.simulation.john.location.get_exit("south")
+        portal = self.simulation.player.location.get_exit("south")
         if portal:
-            self.set_john_location(portal.destination)
+            self.set_player_location(portal.destination)
 
     def action_pause(self):
         self.paused = not self.paused
@@ -130,16 +129,16 @@ class TheForestGameScreen(Screen):
         yield Horizontal(
             Vertical(
                 GameLog(),
-                Input(placeholder=">>>", classes='box'),
-                classes='box column-left'
+                Input(placeholder=">>>", classes="box"),
+                classes="box column-left",
             ),
             Vertical(
-                MiniMap(id="MiniMap", classes='box'),
+                MiniMap(id="MiniMap", classes="box"),
                 BoxLabel(id="EnvironmentalText"),
-                PlayerStatus(id="PlayerStatus", classes='player_status'),
-                classes='box column-right'
+                PlayerStatus(id="PlayerStatus", classes="player_status"),
+                classes="box column-right",
             ),
-            classes='container'
+            classes="container",
         )
         yield Footer()
 
@@ -150,18 +149,18 @@ class TheForestGameScreen(Screen):
         log = self.query_one(GameLog)
 
         cmd = data.value
-        john = self.simulation.john
+        player = self.simulation.player
 
         if cmd.startswith("move"):
             next_portal = cmd[5:].lower()
-            for portal in john.location.exits:
+            for portal in player.location.exits:
                 if portal.name.lower() == next_portal:
-                    john.location = portal.destination
-                    self.set_john_location(portal.destination)
+                    player.location = portal.destination
+                    self.set_player_location(portal.destination)
 
         elif cmd.startswith("say"):
-            john.queued_actions.append({"action": "say", "content": cmd[4:]})
-        log.set_lines(john.history)
+            player.queued_actions.append({"action": "say", "content": cmd[4:]})
+        log.set_lines(player.history)
 
         user_input = self.query_one(Input)
         user_input.value = ""
